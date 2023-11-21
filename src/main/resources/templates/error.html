@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Error-page</title>
+</head>
+<body>
+<form action="#" th:action="@{/}" th:object="${userDto}" method="post">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{username}" /></td>
+            <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="text" th:field="*{password}" /></td>
+            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+        </tr>
+        <tr>
+            <td>Matching Password</td>
+            <td><input type="text" th:field="*{matchingPassword}" /></td>
+            <td th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}">Matching Password Error</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" th:field="*{email}" /></td>
+            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

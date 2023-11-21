@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/order.css" />
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<div class="container">
+    <table class="table table-bordered table-hover" align="center">
+        <tr class="active">
+            <td>Date</td>
+            <td>Status</td>
+            <td>Sum</td>
+            <td>Discount,%</td>
+            <td>SubTotal</td>
+            <td>Make a payment</td>
+        </tr>
+            <tr class="active " th:each="order : ${orders}">
+            <td th:text="${order.created}">Date</td>
+            <td th:text="${order.status}">Status</td>
+            <td th:text="${order.sum}">Sum</td>
+            <td>
+                <p th:if="${order.status ==T(com.project.travelAgency.model.entity.OrderStatus).NEW}" th:text="${order.user.discount}"></p>
+                <p th:unless="---"></p>
+            </td>
+            <th:block th:with=" var = ${order.sum-(order.sum * order.user.discount/100)}">
+                <td>
+                    <p th:if="${order.status ==T(com.project.travelAgency.model.entity.OrderStatus).NEW}" th:text="${var}"></p>
+                    <p th:unless="---"></p>
+                </td>
+            </th:block>
+            <td>
+                <p th:if="${order.status ==T(com.project.travelAgency.model.entity.OrderStatus).NEW}">
+                <a th:href="@{/payment/{id}(id=${order.id})}">Payment</a></p>
+                <p th:unless="---"></p>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Add tour</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<div class="container">
+<form th:action="@{/tours/createTour}" th:object="${tour}" method ="post">
+    <table class="table table-bordered table-hover" align="center">
+        <tr>
+            <td>Type of tour</td>
+            <td>
+                <select th:field="*{typeOfTour}" id="typeOfTour">
+                    <option th:each="typeOfTour:${T(com.project.travelAgency.model.entity.TypeOfTour).values()}"
+                            th:value ="${typeOfTour}" th:text="${typeOfTour}"></option>
+                </select>
+            <td th:if="${#fields.hasErrors('typeOfTour')}" th:errors="*{typeOfTour}"></td>
+            </td>
+        </tr>
+            <td>Country</td>
+            <td><input type="text" th:field="*{countryDto.country}" id="country" ></td>
+            <td th:if="${#fields.hasErrors('countryDto.country')}" th:errors="*{countryDto.country}"></td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td><input type="text" th:field="*{countryDto.city}" id="city" ></td>
+            <td th:if="${#fields.hasErrors('countryDto.city')}" th:errors="*{countryDto.city}"></td>
+        </tr>
+        <tr>
+            <td>During</td>
+            <td><input type="number" th:field="*{days}" id="days" ></td>
+            <td th:if="${#fields.hasErrors('days')}" th:errors="*{days}"></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><input type="number" th:field="*{price}" id="price"></td>
+            <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>
+            <select th:field="*{status}" id="status">
+                <option th:each="status:${T(com.project.travelAgency.model.entity.Status).values()}"
+                        th:value ="${status}" th:text="${status}"></option>
+            </select>
+            <td th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></td>
+            </td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-secondary btn-lg" >Save</button>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/cart.css" />
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+<div class="container">
+<table class="table table-bordered table-hover" align="center">
+    <tr class="active">
+        <td>Id</td>
+        <td>Type of tour</td>
+        <td>Country</td>
+        <td>City</td>
+        <td>Duration</td>
+        <td>Price</td>
+        <td>Amount</td>
+        <td>Sum</td>
+        <td>Delete tour</td>
+    </tr>
+    <tr class="active" th:each="detail : ${cart.cartDetails}">
+        <td th:text="${detail.id}">Id</td>
+        <td th:text="${detail.typeOfTour}">Vacation</td>
+        <td th:text="${detail.country.country}">Italy</td>
+        <td th:text="${detail.country.city}">Italy</td>
+        <td th:text="${detail.days}">7</td>
+        <td th:text="${detail.price}">100</td>
+        <td th:text="${detail.amount}">1</td>
+        <td th:text="${detail.sum}">100</td>
+        <td><a th:href="@{/cart/{id}/deleteTourFromCart(id=${detail.id})}">Remove</a></td>
+    </tr>
+</table>
+</div>
+
+<form th:action="@{/order}" method="post">
+    <button type="submit" class="btn btn-secondary btn-lg" >Create Order</button>
+</form>
+
+</body>
+</html>

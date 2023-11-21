@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/payment.css" />
+</head>
+
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+
+
+<form th:action="@{/payment/{id}(id=${order.id})}" modelAttribute="order" th:object="${order}" method="post">
+    <tr th:each="order : ${order}">
+        <td><input type="hidden" th:field="*{id}"  id="id" placeholder="Id"></td>
+        <td><input type="hidden" th:field="*{sum}"  id="sum" placeholder="Sum"></td>
+        <td><input type="hidden" th:field="*{user.id}"  id="user_id" placeholder="User_id"></td>
+        <td><input type="hidden" th:field="*{created}"  id="created" placeholder="Created"></td>
+        <td><input type="hidden" th:field="*{status}"  id="status" placeholder="Status"></td>
+        <button type="submit" class="btn btn-secondary btn-lg" >Make a payment</button>
+</form>
+</body>
+</html>

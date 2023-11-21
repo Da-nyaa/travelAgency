@@ -1,0 +1,51 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit tour</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+<div class="container-fluid">
+<form th:action="@{/tours/editTour}" modelAttribute="tour" th:object="${tour}" method ="post">
+    <table class="table table-bordered table-hover" align="center">
+        <tr>
+            <td>Id</td>
+            <td>Country_id</td>
+            <td>Country</td>
+            <td>City</td>
+            <td>Duration</td>
+            <td>Price</td>
+            <td>Status</td>
+            <td>TypeOfTour</td>
+        </tr>
+        <tr th:each="tour : ${tour}">
+            <td><input type="text" th:field="*{id}"  id="id" placeholder="Id"></td>
+            <td><input type="text" th:field="*{country.id}"  id="country.id" placeholder="Country"></td>
+            <td><input type="text" th:field="*{country.country}"  id="country" placeholder="Country"></td>
+            <td><input type="text" th:field="*{country.city}"  id="city" placeholder="City"></td>
+            <td><input type="text" th:field="*{days}"  id="days" placeholder="Days"></td>
+            <td> <input type="text" th:field="*{price}"  id="price" placeholder="Price"></td>
+            <td>
+                <select name="status" id="status">
+                    <option th:each="status:${T(com.project.travelAgency.model.entity.Status).values()}"
+                    th:valus ="${status}" th:text="${status}"></option>
+                </select>
+            </td>
+            <td>
+                <select name="typeOfTour" id="typeOfTour">
+                    <option th:each="typeOfTour:${T(com.project.travelAgency.model.entity.TypeOfTour).values()}"
+                            th:valus ="${typeOfTour}" th:text="${typeOfTour}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-secondary btn-lg" >Save</button>
+</form>
+</div>
+</body>
+</html>
